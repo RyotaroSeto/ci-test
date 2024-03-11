@@ -12,5 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: echo "Test: ${{ inputs.test }}"
+        run: echo ${{ inputs.test }}
 
