@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "main.go"
   workflow_dispatch:
 
 jobs:
+  call_reusable_workflow:
+    uses: ./.github/workflows/reusable.yaml
+    with:
+      test: hello1

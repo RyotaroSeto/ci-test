@@ -1,0 +1,16 @@
+name: Reusable
+
+on:
+    workflow_call:
+      inputs:
+        test:
+          required: true
+          type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo "Test: ${{ inputs.test }}"
+
