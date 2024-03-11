@@ -45,7 +45,7 @@ jobs:
 
   work-calls:
     needs: [ call_reusable_workflow ]
-    if: needs.call_reusable_workflow.changes.outputs.basketball == 'true'
+    if: needs.call_reusable_workflow.changes.basketball == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/reusable.yaml
