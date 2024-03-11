@@ -40,7 +40,7 @@ jobs:
               - '3.yaml'
 
       - name: Call reusable workflow
-        if: steps.filter.outputs.baseball == 'true'
+        if: steps.filter.outputs.basketball == 'true'
         uses: ./.github/workflows/reusable.yaml
         with:
           target: baseball
