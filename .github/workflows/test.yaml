@@ -25,6 +25,7 @@ jobs:
     #         # yaml: '3.yaml'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -40,7 +41,7 @@ jobs:
 
       - name: Call reusable workflow
         if: steps.changes.outputs.baseball == 'true'
-        uses: ./.github/workflows/reusable.yaml
+        uses: RyotaroSeto/ci-test/.github/workflows/reusable.yaml@main
         with:
           target: baseball
       - name: Call reusable workflow
