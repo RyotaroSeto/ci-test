@@ -43,16 +43,22 @@ jobs:
             soccer:
               - '3.yaml'
 
+  work-calls:
+    needs: [ call_reusable_workflow ]
+    if: needs.call_reusable_workflow.outputs.basketball == 'true'
+    uses: ./.github/workflows/reusable.yaml
+    with:
+      target: basketball
       # - name: Call reusable workflow
       #   if: steps.filter.outputs.${{ matrix.target }} == 'true'
       #   # if: steps.filter.outputs.basketball == 'true'
       #   uses: ./.github/workflows/reusable.yaml
       #   with:
       #     target: ${{ matrix.target }}
-      - name: Call reusable workflow
-        if: steps.filter.outputs.basketball == 'true'
-        uses: ./.github/workflows/reusable.yaml #現状ここが呼べなくてエラー
-        with:
-          target: basketball
+      # - name: Call reusable workflow
+      #   if: steps.filter.outputs.basketball == 'true'
+      #   uses: ./.github/workflows/reusable.yaml #現状ここが呼べなくてエラー
+      #   with:
+      #     target: basketball
 
 
