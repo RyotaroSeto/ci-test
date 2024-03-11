@@ -41,17 +41,17 @@ jobs:
 
       - name: Call reusable workflow
         if: steps.changes.outputs.baseball == 'true'
-        uses: ./.github/reusable/action.yml
+        uses: ./.github/workflows/reusable.yaml
         with:
           target: baseball
       - name: Call reusable workflow
         if: steps.changes.outputs.basketball == 'true'
-        uses: ./.github/reusable/action.yml
+        uses: ./.github/workflows/reusable.yaml
         with:
           target: basketball
       - name: Call reusable workflow
         if: steps.changes.outputs.soccer == 'true'
-        uses: ./.github/reusable/action.yml
+        uses: ./.github/workflows/reusable.yaml
         with:
           target: soccer
 
