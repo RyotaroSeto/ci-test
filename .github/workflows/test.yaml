@@ -55,8 +55,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Call reusable workflow
-        uses: ryotaroseto/ci-test/.github/workflows/reusable.yaml@main
-        # uses: ./.github/workflows/reusable.yaml
+        uses: ./.github/workflows/reusable.yaml
         with:
           target: basketball
       # - name: Call reusable workflow
