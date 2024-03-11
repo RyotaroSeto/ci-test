@@ -25,20 +25,21 @@ jobs:
             yaml: '3.yaml'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Check for changes
-        id: check
-        run: |
-          changed_files=$(git diff --name-only HEAD^ HEAD)
-          for file in $changed_files; do
-            if [[ "${{ matrix.yaml }}" =~ "$file" ]]; then
-              echo "::set-output name=changed::true"
-              break
-            fi
-          done
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            baseball:
+              - '1.yaml'
+            basketball:
+              - '2.yaml'
+              - '4.yaml'
+              - '5.yaml'
+            soccer:
+              - '3.yaml'
+
       - name: Call reusable workflow
-        if: steps.check.outputs.changed == 'true'
+        if: steps.changes.outputs.${{ matrix.target }} == 'true'
         uses: ./.github/workflows/reusable.yaml
         with:
           target: ${{ matrix.target }}
