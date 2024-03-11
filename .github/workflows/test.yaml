@@ -23,7 +23,23 @@ jobs:
             yaml: ['2.yaml', '4.yaml', '5.yaml']
           - target: soccer
             yaml: '3.yaml'
-    uses: ./.github/workflows/reusable.yaml
-    with:
-      target: ${{ matrix.target }}
-      yaml: ${{ matrix.yaml }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check for changes
+        id: check
+        run: |
+          changed_files=$(git diff --name-only HEAD^ HEAD)
+          for file in $changed_files; do
+            if [[ "${{ matrix.yaml }}" =~ "$file" ]]; then
+              echo "::set-output name=changed::true"
+              break
+            fi
+          done
+      - name: Call reusable workflow
+        if: steps.check.outputs.changed == 'true'
+        uses: ./.github/workflows/reusable.yaml
+        with:
+          target: ${{ matrix.target }}
+          yaml: ${{ matrix.yaml }}
