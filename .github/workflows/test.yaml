@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Paths Filter
         uses: dorny/paths-filter@v3
-        id: filter
+        id: changes
         with:
           filters: |
             baseball:
@@ -45,7 +45,7 @@ jobs:
 
   work-calls:
     needs: [ call_reusable_workflow ]
-    if: needs.call_reusable_workflow.outputs.basketball == 'true'
+    if: needs.call_reusable_workflow.changes.outputs.basketball == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/reusable.yaml
