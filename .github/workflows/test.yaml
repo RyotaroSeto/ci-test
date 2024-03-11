@@ -14,15 +14,15 @@ on:
 
 jobs:
   call_reusable_workflow:
-    strategy:
-      matrix:
-        include:
-          - target: baseball
-            # yaml: '1.yaml'
-          - target: basketball
-            # yaml: ['2.yaml', '4.yaml', '5.yaml']
-          - target: soccer
-            # yaml: '3.yaml'
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - target: baseball
+    #         # yaml: '1.yaml'
+    #       - target: basketball
+    #         # yaml: ['2.yaml', '4.yaml', '5.yaml']
+    #       - target: soccer
+    #         # yaml: '3.yaml'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,25 @@ jobs:
               - '3.yaml'
 
       - name: Call reusable workflow
-        if: steps.changes.outputs.${{ matrix.target }} == 'true'
-        uses: ./.github/workflows/reusable.yaml
+        if: steps.changes.outputs.baseball == 'true'
+        uses: ./.github/reusable/action.yml
         with:
-          target: ${{ matrix.target }}
+          target: baseball
+      - name: Call reusable workflow
+        if: steps.changes.outputs.basketball == 'true'
+        uses: ./.github/reusable/action.yml
+        with:
+          target: basketball
+      - name: Call reusable workflow
+        if: steps.changes.outputs.soccer == 'true'
+        uses: ./.github/reusable/action.yml
+        with:
+          target: soccer
+
+
+
+      # - name: Call reusable workflow
+      #   if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      #   uses: ./.github/workflows/reusable.yaml
+      #   with:
+      #     target: ${{ matrix.target }}
