@@ -17,11 +17,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - target: dev
+          - target: baseball
             text: '1.txt'
-          - target: stage
+          - target: basketball
             text: ['2.txt', '4.txt', '5.txt']
-          - target: prod
+          - target: soccer
             text: '3.txt'
     uses: ./.github/workflows/reusable.yaml
     with:
