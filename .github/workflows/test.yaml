@@ -46,7 +46,7 @@ jobs:
           target: baseball
       - name: Call reusable workflow
         if: steps.changes.outputs.basketball == 'true'
-        uses: ./.github/workflows/reusable.yaml
+        uses: ./.github/workflows/reusable.yaml@main
         with:
           target: basketball
       - name: Call reusable workflow
