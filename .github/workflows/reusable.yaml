@@ -1,11 +1,11 @@
 name: Reusable
 
 on:
-    workflow_call:
-      inputs:
-        test:
-          required: true
-          type: string
+  workflow_call:
+    inputs:
+      test:
+        required: true
+        type: string
 
 jobs:
   test:
