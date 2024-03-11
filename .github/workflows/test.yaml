@@ -18,11 +18,11 @@ jobs:
       matrix:
         include:
           - target: baseball
-            yaml: '1.yaml'
+            # yaml: '1.yaml'
           - target: basketball
-            yaml: ['2.yaml', '4.yaml', '5.yaml']
+            # yaml: ['2.yaml', '4.yaml', '5.yaml']
           - target: soccer
-            yaml: '3.yaml'
+            # yaml: '3.yaml'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
