@@ -17,13 +17,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Echo on change
-        run: |
-          changed_files=$(git diff --name-only HEAD^ HEAD)
-          for file in $changed_files; do
-            if [[ "${{ inputs.yaml }}" =~ "$file" ]]; then
-              echo ${{ inputs.target }}
-            fi
-          done
+        run: echo ${{ inputs.target }}
+      - name: Echo on change
+        run: echo ${{ inputs.yaml }}
+        # run: |
+        #   changed_files=$(git diff --name-only HEAD^ HEAD)
+        #   for file in $changed_files; do
+        #     if [[ "${{ inputs.yaml }}" =~ "$file" ]]; then
+        #       echo ${{ inputs.target }}
+        #     fi
+        #   done
