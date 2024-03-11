@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - '1.txt'
-      - '2.txt'
-      - '3.txt'
-      - '4.txt'
-      - '5.txt'
+      - '1.yaml'
+      - '2.yaml'
+      - '3.yaml'
+      - '4.yaml'
+      - '5.yaml'
   workflow_dispatch:
 
 jobs:
@@ -18,12 +18,12 @@ jobs:
       matrix:
         include:
           - target: baseball
-            text: '1.txt'
+            yaml: '1.yaml'
           - target: basketball
-            text: ['2.txt', '4.txt', '5.txt']
+            yaml: ['2.yaml', '4.yaml', '5.yaml']
           - target: soccer
-            text: '3.txt'
+            yaml: '3.yaml'
     uses: ./.github/workflows/reusable.yaml
     with:
       target: ${{ matrix.target }}
-      text: ${{ matrix.text }}
+      yaml: ${{ matrix.yaml }}

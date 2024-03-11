@@ -7,7 +7,7 @@ on:
         description: 'Target to deploy app'
         required: true
         type: string
-      text:
+      yaml:
         description: 'Type of deployment'
         required: true
         type: string
@@ -23,7 +23,7 @@ jobs:
         run: |
           changed_files=$(git diff --name-only HEAD^ HEAD)
           for file in $changed_files; do
-            if [[ "${{ inputs.text }}" =~ "$file" ]]; then
+            if [[ "${{ inputs.yaml }}" =~ "$file" ]]; then
               echo ${{ inputs.target }}
             fi
           done
