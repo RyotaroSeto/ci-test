@@ -7,10 +7,6 @@ on:
         description: 'Target to deploy app'
         required: true
         type: string
-      yaml:
-        description: 'Type of deployment'
-        required: true
-        type: string
 
 
 jobs:
@@ -19,5 +15,3 @@ jobs:
     steps:
       - name: Echo on change
         run: echo ${{ inputs.target }}
-      - name: Echo on change
-        run: echo ${{ inputs.yaml }}

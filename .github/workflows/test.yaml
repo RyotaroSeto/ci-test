@@ -42,4 +42,3 @@ jobs:
         uses: ./.github/workflows/reusable.yaml
         with:
           target: ${{ matrix.target }}
-          yaml: ${{ matrix.yaml }}
