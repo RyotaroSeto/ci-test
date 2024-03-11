@@ -12,6 +12,9 @@ on:
 
 jobs:
   call_reusable_workflow:
+    strategy:
+      matrix:
+        target: [dev, stage, prod]
     uses: ./.github/workflows/reusable.yaml
     with:
-      test: hello1
+      target: ${{ matrix.target }}
