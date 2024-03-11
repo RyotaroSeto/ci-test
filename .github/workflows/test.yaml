@@ -40,6 +40,7 @@ jobs:
               - '3.yaml'
 
   call_reusable_workflow:
+    name: Call reusable workflow
     needs: [ paths ]
     if: needs.paths.outputs.basketball == 'true'
     uses: ./.github/workflows/reusable.yaml
