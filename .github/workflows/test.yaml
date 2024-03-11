@@ -14,15 +14,15 @@ on:
 
 jobs:
   call_reusable_workflow:
-    strategy:
-      matrix:
-        include:
-          - target: baseball
-            # yaml: '1.yaml'
-          - target: basketball
-            # yaml: ['2.yaml', '4.yaml', '5.yaml']
-          - target: soccer
-            # yaml: '3.yaml'
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - target: baseball
+    #         # yaml: '1.yaml'
+    #       - target: basketball
+    #         # yaml: ['2.yaml', '4.yaml', '5.yaml']
+    #       - target: soccer
+    #         # yaml: '3.yaml'
     name: CI
     runs-on: ubuntu-latest
 
@@ -43,33 +43,16 @@ jobs:
             soccer:
               - '3.yaml'
 
-      - name: Call reusable workflow
-        if: steps.filter.outputs.${{ matrix.target }} == 'true'
-        # if: steps.filter.outputs.basketball == 'true'
-        uses: ./.github/workflows/reusable.yaml
-        with:
-          target: ${{ matrix.target }}
-
-
-
       # - name: Call reusable workflow
-      #   if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      #   if: steps.filter.outputs.${{ matrix.target }} == 'true'
+      #   # if: steps.filter.outputs.basketball == 'true'
       #   uses: ./.github/workflows/reusable.yaml
       #   with:
       #     target: ${{ matrix.target }}
+      - name: Call reusable workflow
+        if: steps.filter.outputs.basketball == 'true'
+        uses: ./.github/workflows/reusable.yaml #現状ここが呼べなくてエラー
+        with:
+          target: basketball
 
-    # - name: Call reusable workflow
-    #   if: steps.changes.outputs.baseball == 'true'
-    #   uses: ./.github/workflows/reusable.yaml
-    #   with:
-    #     target: baseball
-    # - name: Call reusable workflow
-    #   if: steps.changes.outputs.basketball == 'true'
-    #   uses: ./.github/workflows/reusable.yaml
-    #   with:
-    #     target: basketball
-    # - name: Call reusable workflow
-    #   if: steps.changes.outputs.soccer == 'true'
-    #   uses: ./.github/workflows/reusable.yaml
-    #   with:
-    #     target: soccer
+
