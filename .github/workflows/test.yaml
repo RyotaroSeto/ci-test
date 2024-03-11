@@ -42,10 +42,14 @@ jobs:
               - '5.yaml'
             soccer:
               - '3.yaml'
+    outputs:
+      baseball: ${{ steps.changes.outputs.baseball }}
+      basketball: ${{ steps.changes.outputs.basketball }}
+      soccer: ${{ steps.changes.outputs.soccer }}
 
   work-calls:
     needs: [ call_reusable_workflow ]
-    if: ${{ needs.call_reusable_workflow.outputs.changes == 'true' }}
+    if: needs.call_reusable_workflow.outputs.basketball == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/reusable.yaml
