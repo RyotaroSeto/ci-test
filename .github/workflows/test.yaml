@@ -5,19 +5,25 @@ on:
     branches:
       - main
     paths:
-      - "1.txt"
-      - "2.txt"
-      - "3.txt"
+      - '1.txt'
+      - '2.txt'
+      - '3.txt'
+      - '4.txt'
+      - '5.txt'
   workflow_dispatch:
 
 jobs:
   call_reusable_workflow:
     strategy:
       matrix:
-        target: [dev, stage, prod]
-        types: ["1.txt", "2.txt", "3.txt"]
+        include:
+          - target: dev
+            text: '1.txt'
+          - target: stage
+            text: ['2.txt', '4.txt', '5.txt']
+          - target: prod
+            text: '3.txt'
     uses: ./.github/workflows/reusable.yaml
     with:
       target: ${{ matrix.target }}
-      types: ${{ matrix.types }}
-
+      text: ${{ matrix.text }}

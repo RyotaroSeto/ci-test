@@ -1,4 +1,4 @@
-name: Build & Deploy for given tareget
+name: Build & Deploy for given target
 
 on:
   workflow_call:
@@ -7,7 +7,7 @@ on:
         description: 'Target to deploy app'
         required: true
         type: string
-      types:
+      text:
         description: 'Type of deployment'
         required: true
         type: string
@@ -16,8 +16,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: echo ${{ inputs.target }}
-      - name: Test2
-        run: echo ${{ inputs.types }}
-
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Echo on change
+        run: |
+          changed_files=$(git diff --name-only HEAD^ HEAD)
+          for file in $changed_files; do
+            if [[ "${{ inputs.text }}" =~ "$file" ]]; then
+              echo "File $file changed in ${{ inputs.target }}"
+            fi
+          done
