@@ -39,6 +39,12 @@ jobs:
             soccer:
               - '3.yaml'
 
+      - name: Call reusable workflow
+        if: steps.filter.outputs.baseball == 'true'
+        uses: ./.github/workflows/reusable.yaml
+        with:
+          target: baseball
+
   call_reusable_workflow:
     name: Call reusable workflow
     needs: [ paths ]
