@@ -39,6 +39,7 @@ jobs:
             soccer:
               - '3.yaml'
 
+      - uses: actions/checkout@v4
       - name: Call reusable workflow
         if: steps.changes.outputs.baseball == 'true'
         uses: ./.github/workflows/reusable.yaml@main
