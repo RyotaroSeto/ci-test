@@ -13,20 +13,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  paths:
-    # strategy:
-    #   matrix:
-    #     include:
-    #       - target: baseball
-    #         # yaml: '1.yaml'
-    #       - target: basketball
-    #         # yaml: ['2.yaml', '4.yaml', '5.yaml']
-    #       - target: soccer
-    #         # yaml: '3.yaml'
+  call_reusable_workflow:
+    strategy:
+      matrix:
+        include:
+          - target: baseball
+            # yaml: '1.yaml'
+          - target: basketball
+            # yaml: ['2.yaml', '4.yaml', '5.yaml']
+          - target: soccer
+            # yaml: '3.yaml'
+    name: CI
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Paths Filter
+        uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
@@ -39,14 +43,13 @@ jobs:
             soccer:
               - '3.yaml'
 
+      - name: Call reusable workflow
+        if: steps.filter.outputs.${{ matrix.target }} == 'true'
+        # if: steps.filter.outputs.basketball == 'true'
+        uses: ./.github/workflows/reusable.yaml
+        with:
+          target: ${{ matrix.target }}
 
-  call_reusable_workflow:
-    name: Call reusable workflow
-    needs: [ paths ]
-    if: needs.paths.filter.outputs.basketball == 'true'
-    uses: ./.github/workflows/reusable.yaml
-    with:
-      target: basketball
 
 
       # - name: Call reusable workflow
