@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  call_reusable_workflow:
+  build:
     # strategy:
     #   matrix:
     #     include:
@@ -39,22 +39,25 @@ jobs:
             soccer:
               - '3.yaml'
 
-      - uses: actions/checkout@v4
-      - name: Call reusable workflow
-        if: steps.changes.outputs.baseball == 'true'
-        uses: ./.github/workflows/reusable.yaml@main
-        with:
-          target: baseball
-      - name: Call reusable workflow
-        if: steps.changes.outputs.basketball == 'true'
-        uses: ./.github/workflows/reusable.yaml@main
-        with:
-          target: basketball
-      - name: Call reusable workflow
-        if: steps.changes.outputs.soccer == 'true'
-        uses: ./.github/workflows/reusable.yaml
-        with:
-          target: soccer
+  call_reusable_workflow:
+    uses: ./.github/workflows/reusable.yaml
+    with:
+      target: baseball
+      # - name: Call reusable workflow
+      #   if: steps.changes.outputs.baseball == 'true'
+      #   uses: ./.github/workflows/reusable.yaml
+      #   with:
+      #     target: baseball
+      # - name: Call reusable workflow
+      #   if: steps.changes.outputs.basketball == 'true'
+      #   uses: ./.github/workflows/reusable.yaml
+      #   with:
+      #     target: basketball
+      # - name: Call reusable workflow
+      #   if: steps.changes.outputs.soccer == 'true'
+      #   uses: ./.github/workflows/reusable.yaml
+      #   with:
+      #     target: soccer
 
 
 
