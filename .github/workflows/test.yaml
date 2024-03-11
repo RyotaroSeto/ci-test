@@ -15,6 +15,9 @@ jobs:
     strategy:
       matrix:
         target: [dev, stage, prod]
+        types: ["1.txt", "2.txt", "3.txt"]
     uses: ./.github/workflows/reusable.yaml
     with:
       target: ${{ matrix.target }}
+      types: ${{ matrix.types }}
+
