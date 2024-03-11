@@ -41,7 +41,7 @@ jobs:
 
       - name: Call reusable workflow
         if: steps.changes.outputs.baseball == 'true'
-        uses: RyotaroSeto/ci-test/.github/workflows/reusable.yaml@main
+        uses: ./.github/workflows/reusable.yaml@main
         with:
           target: baseball
       - name: Call reusable workflow
